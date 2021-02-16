@@ -42,7 +42,9 @@ public class SinkPropertiesFactory {
     properties.put(BigQuerySinkConfig.KEYFILE_CONFIG, "key.json");
 
     properties.put(BigQuerySinkConfig.SANITIZE_TOPICS_CONFIG, "false");
-    properties.put(BigQuerySinkConfig.AVRO_DATA_CACHE_SIZE_CONFIG, "10");
+//    properties.put(BigQuerySinkConfig.AVRO_DATA_CACHE_SIZE_CONFIG, "10");
+    properties.put(BigQuerySinkConfig.PROTOBUF_DATA_CACHE_SIZE_CONFIG, "10");
+
 
     properties.put(BigQuerySinkConfig.ALLOW_NEW_BIGQUERY_FIELDS_CONFIG, "false");
     properties.put(BigQuerySinkConfig.ALLOW_BIGQUERY_REQUIRED_FIELD_RELAXATION_CONFIG, "false");
@@ -65,7 +67,8 @@ public class SinkPropertiesFactory {
     config.getString(config.PROJECT_CONFIG);
 
     config.getBoolean(config.SANITIZE_TOPICS_CONFIG);
-    config.getInt(config.AVRO_DATA_CACHE_SIZE_CONFIG);
+//    config.getInt(config.AVRO_DATA_CACHE_SIZE_CONFIG);
+    config.getInt(config.PROTOBUF_DATA_CACHE_SIZE_CONFIG);
 
     config.getBoolean(config.ALLOW_NEW_BIGQUERY_FIELDS_CONFIG);
     config.getBoolean(config.ALLOW_BIGQUERY_REQUIRED_FIELD_RELAXATION_CONFIG);

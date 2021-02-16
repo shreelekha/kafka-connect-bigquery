@@ -197,6 +197,16 @@ public class BigQuerySinkConfig extends AbstractConfig {
   private static final String AVRO_DATA_CACHE_SIZE_DOC =
       "The size of the cache to use when converting schemas from Avro to Kafka Connect";
 
+  public static final String PROTOBUF_DATA_CACHE_SIZE_CONFIG =                 "protobufDataCacheSize";
+  private static final ConfigDef.Type PROTOBUF_DATA_CACHE_SIZE_TYPE =          ConfigDef.Type.INT;
+  public static final Integer PROTOBUF_DATA_CACHE_SIZE_DEFAULT =               100;
+  private static final ConfigDef.Validator PROTOBUF_DATA_CACHE_SIZE_VALIDATOR =
+          ConfigDef.Range.atLeast(0);
+  private static final ConfigDef.Importance PROTOBUF_DATA_CACHE_SIZE_IMPORTANCE =
+          ConfigDef.Importance.LOW;
+  private static final String PROTOBUF_DATA_CACHE_SIZE_DOC =
+          "The size of the cache to use when converting schemas from Avro to Kafka Connect";
+
   public static final String CONVERT_DOUBLE_SPECIAL_VALUES_CONFIG =    "convertDoubleSpecialValues";
   public static final ConfigDef.Type CONVERT_DOUBLE_SPECIAL_VALUES_TYPE =   ConfigDef.Type.BOOLEAN;
   public static final Boolean CONVERT_DOUBLE_SPECIAL_VALUES_DEFAULT =       false;
@@ -213,7 +223,7 @@ public class BigQuerySinkConfig extends AbstractConfig {
       ConfigDef.Importance.LOW;
   private static final String ALL_BQ_FIELDS_NULLABLE_DOC =
       "If true, no fields in any produced BigQuery schema will be REQUIRED. All "
-      + "non-nullable avro fields will be translated as NULLABLE (or REPEATED, if arrays).";
+      + "non-nullable avro,protobuf fields will be translated as NULLABLE (or REPEATED, if arrays).";
 
   public static final String TABLE_CREATE_CONFIG =                     "autoCreateTables";
   private static final ConfigDef.Type TABLE_CREATE_TYPE =              ConfigDef.Type.BOOLEAN;
@@ -423,6 +433,13 @@ public class BigQuerySinkConfig extends AbstractConfig {
             AVRO_DATA_CACHE_SIZE_VALIDATOR,
             AVRO_DATA_CACHE_SIZE_IMPORTANCE,
             AVRO_DATA_CACHE_SIZE_DOC
+        ).define(
+            PROTOBUF_DATA_CACHE_SIZE_CONFIG,
+            PROTOBUF_DATA_CACHE_SIZE_TYPE,
+            PROTOBUF_DATA_CACHE_SIZE_DEFAULT,
+            PROTOBUF_DATA_CACHE_SIZE_VALIDATOR,
+            PROTOBUF_DATA_CACHE_SIZE_IMPORTANCE,
+            PROTOBUF_DATA_CACHE_SIZE_DOC
         ).define(
             ALL_BQ_FIELDS_NULLABLE_CONFIG,
             ALL_BQ_FIELDS_NULLABLE_TYPE,

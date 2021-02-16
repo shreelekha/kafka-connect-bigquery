@@ -26,6 +26,7 @@ import com.wepay.kafka.connect.bigquery.retrieve.IdentitySchemaRetriever;
 import com.wepay.kafka.connect.bigquery.utils.FieldNameSanitizer;
 import io.confluent.connect.avro.AvroConverter;
 import io.confluent.kafka.formatter.AvroMessageReader;
+import io.confluent.kafka.formatter.protobuf.ProtobufMessageReader;
 import io.confluent.kafka.schemaregistry.ClusterTestHarness;
 import io.confluent.kafka.schemaregistry.CompatibilityLevel;
 import io.confluent.kafka.schemaregistry.RestApp;
@@ -235,7 +236,8 @@ public class BigQuerySinkConnectorIT extends BaseConnectorIT {
     messageReaderProps.put("topic", topic);
     InputStream dataStream = BigQuerySinkConnectorIT.class.getClassLoader()
         .getResourceAsStream(testCaseDir + "data.json");
-    MessageReader messageReader = new AvroMessageReader();
+//    MessageReader messageReader = new AvroMessageReader();
+    MessageReader messageReader = new ProtobufMessageReader();
     messageReader.init(dataStream, messageReaderProps);
 
     ProducerRecord<byte[], byte[]> message = messageReader.readMessage();
